@@ -6,7 +6,15 @@
  * rules belong in `../core` instead, so that they stay callable from a test, a
  * scheduled job or the seeding CLI without constructing an HTTP request.
  *
- * Nothing is exported yet.
+ * Organised to mirror `../core`: one directory per service from design document
+ * section 9.2, plus `shared` for the JSON and status-code plumbing. A
+ * directory's `index.ts` is its public face.
  */
 
-export {};
+export {
+  getPortfolioRoute,
+  handleGetPortfolio,
+  parsePortfolioQuery,
+} from "./investors";
+export { resolveDemoViewer } from "./identity";
+export { failureResponse, jsonResponse } from "./shared";
