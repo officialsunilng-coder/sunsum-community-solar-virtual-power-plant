@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Badge } from "@/components/ui/Badge";
+import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { BrandMark } from "./BrandMark";
 import styles from "./PublicShell.module.css";
 
@@ -46,6 +47,8 @@ export function PublicShell({ children }: PublicShellProps) {
               ))}
             </ul>
           </nav>
+
+          <ThemeSwitcher />
         </div>
       </header>
 
