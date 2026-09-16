@@ -103,7 +103,9 @@ test("the site-owner dashboard renders its mock scenario without overflow", asyn
     name: /select 789 pine lane/i,
   });
   await pineMarker.hover();
-  await expect(page.getByRole("tooltip").filter({ hasText: "789 Pine Lane" })).toBeVisible();
+  await expect(
+    page.getByRole("tooltip").filter({ hasText: "789 Pine Lane" }),
+  ).toBeVisible();
   await expect(
     page.getByRole("tooltip").filter({ hasText: "789 Pine Lane" }),
   ).toContainText("Mechanicsville");
@@ -148,9 +150,13 @@ test("the site-owner dashboard renders its mock scenario without overflow", asyn
       .locator(".."),
   ).toContainText("$18,000");
 
-  await page.getByRole("button", { name: /use light theme/i }).click();
+  await page.getByTitle("Always use the light theme").click();
+  await expect(
+    page.getByRole("radio", { name: /^light$/i }),
+  ).toBeChecked();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
-  await page.getByRole("button", { name: /use dark theme/i }).click();
+  await page.getByTitle("Always use the dark theme").click();
+  await expect(page.getByRole("radio", { name: /^dark$/i })).toBeChecked();
   await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
   expect(await hasOverflow(page)).toBe(false);
 
